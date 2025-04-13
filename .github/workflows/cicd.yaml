@@ -1,0 +1,79 @@
+name: Build and Push travi backend Image to Registry
+
+on:
+  push:
+    branches: [ main, staging, dev  ]
+  pull_request:
+    branches: [ main, staging, dev ]
+
+env:
+  IMAGE_URI: "339712900082.dkr.ecr.us-east-1.amazonaws.com/cicd"
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-latest
+    name: Compile Code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: run unit-test
+        run: | 
+          cd rest-api
+          echo "runs unit test"
+
+  compile-code:
+    runs-on: ubuntu-latest
+    name: Compile Code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: npm install
+        run: |
+          cd rest-api
+          npm install
+
+      - name: npm run build
+        run: |
+          cd rest-api
+          npm run build
+
+  sonarqube:
+    runs-on: ubuntu-latest
+    name: Compile Code
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: sonarqube test
+        run: echo "run sonarqube test"
+
+  build-image:
+    runs-on: ubuntu-latest
+    name: 'Build and push docker image to Artifact Registry'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: "Export AWS Credentials"
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+    - name: 'Authenticate to AWS ECR'
+      run:  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $IMAGE_URI
+
+    - name: Set build scipt to be executable
+      run: |
+        cd rest-api
+        docker build -t $IMAGE_URI:prod .
+
+    - name: Build and Push Docker Image to Registry
+      run: docker push $IMAGE_URI:prod
+
+
+
