@@ -66,6 +66,7 @@ jobs:
 
     - name: 'Authenticate to AWS ECR'
       run:  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $IMAGE_URI
+      
 
     - name: Set build scipt to be executable
       run: |
