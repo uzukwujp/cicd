@@ -1,0 +1,25 @@
+  
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: time-checker-service
+  annotations:
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "*"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/current-time"
+        backend:
+          service:
+            name: time-checker-service
+            port:
+              number: 80
+
+
+
+

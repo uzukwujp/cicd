@@ -23,7 +23,7 @@ spec:
       containers:
       - name: time-checker-service
         securityContext: {}
-        image: "nginx:latest"
+        image: "533266983918.dkr.ecr.us-east-1.amazonaws.com/cicd:prod"
         imagePullPolicy: Always
         ports:
         - name: http

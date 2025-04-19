@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: time-checker
+  namespace: argocd
+  annotations:
+    
+spec:
+  destination:
+    server: https://BE7933E2A56FA6162F50A4F67EFE2A03.gr7.us-east-1.eks.amazonaws.com
+    namespace: prod
+  project: default
+  source:
+    plugin:
+      name: kustomized
+    path: workloads/overlays/prod
+    repoURL: 'https://github.com/uzukwujp/cicd.git'
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - Validate=true
+    - ServerSideApply=true
+
+    

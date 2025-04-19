@@ -1,0 +1,21 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: time-checker-service
+  annotations:
+  labels:
+    app.kubernetes.io/name: time-checker-service
+    app.kubernetes.io/instance: time-checker-service
+    app.kubernetes.io/version: "1.16.0"
+    
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 4000
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: time-checker-service
+    app.kubernetes.io/instance: time-checker-service

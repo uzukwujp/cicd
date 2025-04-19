@@ -29,6 +29,8 @@ worker_node_iam_role_name  = "poc-worker-node-IAM-role"
 chart_version              = "7.7.1"
 custom_values              = "helm_values/argocd.yaml"
 cluster_version            = "1.32"
+nginx_version              = "2.1.0"
+nginx_values               = "helm_values/nginx.yaml"
 repository_names   = [ 
   {
   "repo_name"      = "cicd"

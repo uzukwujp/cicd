@@ -56,3 +56,10 @@ module "argocd" {
   depends_on    = [ module.eks_worker_node ]  
 }
 
+module "nginx-ingress-controller" {
+
+  source        = "./modules/nginx-ingress-controller"
+  nginx_version = var.nginx_version
+  nginx_values  = var.nginx_values  
+}
+

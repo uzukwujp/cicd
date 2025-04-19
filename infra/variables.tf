@@ -94,6 +94,16 @@ variable "repository_names" {
    description = "names of private ecr repository names"  
 }
 
+variable "nginx_version" {
+   type = string
+   description = "chart version for nginx ingress controller"  
+}
+
+variable "nginx_values" {
+    type = string
+    description = "file path to the nginx helm values file"  
+}
+
 
 
 
