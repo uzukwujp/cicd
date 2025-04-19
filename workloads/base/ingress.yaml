@@ -9,11 +9,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: "*"
-    http:
+  - http:
       paths:
-      - pathType: Prefix
-        path: "/current-time"
+      - path: /current-time
+        pathType: Prefix
         backend:
           service:
             name: time-checker-service
