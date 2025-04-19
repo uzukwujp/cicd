@@ -8,7 +8,8 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - http:
+  - host: "*.com"  # Wildcard host (adjust if needed)
+    http:
       paths:
       - path: /current-time
         pathType: Prefix
