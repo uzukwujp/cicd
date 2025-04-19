@@ -5,11 +5,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: time-checker-service
-  annotations:
 spec:
-  ingressClassName: nginx
   rules:
-  - http:
+  - host: "*"
+    http:
       paths:
       - path: /current-time
         pathType: Prefix
