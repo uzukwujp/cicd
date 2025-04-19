@@ -7,7 +7,7 @@ on:
     branches: [ main, staging, dev ]
 
 env:
-  IMAGE_URI: "339712900082.dkr.ecr.us-east-1.amazonaws.com/cicd"
+  IMAGE_URI: "533266983918.dkr.ecr.us-east-1.amazonaws.com/cicd"
 
 jobs:
   unit-test:

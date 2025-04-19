@@ -1,0 +1,40 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service
+  labels:
+    app.kubernetes.io/name: backend-service
+    app.kubernetes.io/instance: backend-service
+    app.kubernetes.io/version: "1.16.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: backend-service
+      app.kubernetes.io/instance: backend-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: backend-service
+        app.kubernetes.io/instance: backend-service
+    spec:
+      securityContext: {}
+      containers:
+      - name: backend-service
+        securityContext: {}
+        image: "nginx:latest"
+        imagePullPolicy: IfNotPresent
+        #### key and values from external secret file
+        envFrom:
+        - secretRef:
+            name: backend-service
+        - configMapRef:
+            name: backend-service
+        ports:
+        - name: http
+          containerPort: 9000
+          protocol: TCP
+       
+
+
