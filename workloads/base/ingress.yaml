@@ -7,7 +7,7 @@ metadata:
   name: time-checker-service
 spec:
   rules:
-  - host: "*.com"
+  - host: "a6f071b1c07714839a74c6fdb8913816-210941100.us-east-1.elb.amazonaws.com"
     http:
       paths:
       - path: /current-time
